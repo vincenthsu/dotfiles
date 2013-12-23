@@ -1,0 +1,10 @@
+#!/bin/sh
+ROUTE=$1
+DEFAULT=192.168.6.2
+if [ -z "$ROUTE" ]; then
+    echo "route_addr not set, use default: $DEFAULT\
+    \n\nformat: add_route <route_addr>"
+    sudo route add default gw $DEFAULT
+else
+    sudo route add default gw $ROUTE
+fi

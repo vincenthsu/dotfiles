@@ -1,0 +1,10 @@
+[user]
+	name = "<Your Name>"
+	email = <Your Email>
+[color]
+	ui = always
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[alias]
+	fulllog = log --format=fuller

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "Password not set, exit!\
+    \n\nformat: mount_samba <password>"
+else
+    mount -t cifs //172.16.34.141/temp/ $HOME/samba -o user='fmpi\vincenthsu',iocharset=utf8,password=$1
+fi

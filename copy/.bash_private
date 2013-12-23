@@ -1,0 +1,36 @@
+# some more aliases
+## already have commands
+alias vi='vim -p'
+alias vim='vim -p'
+alias cp='cp -R'
+alias rm='rm -R'
+alias chmod='chmod -R'
+alias chown='chown -R'
+alias wget='wget -np -c'
+alias grep='grep --mmap'
+alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
+alias ctags='ctags --sort=yes --languages=asm,c,c++,java,sh --exclude=.git --exclude=.svn -R'
+## new aliases
+alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias lm='ls -al |more'
+alias fn='find . -name'
+alias findn='find . -name'
+alias apti='apt-fast install -y --force-yes'
+alias rscp='rsync -av -P -e ssh'
+alias tags='ctags; gtags'
+alias tmuxa='tmux attach'
+alias tmuxt='tmux attach -t'
+alias tmuxl='tmux ls'
+alias tmuxs='tmux-session save'
+alias tmuxr='tmux-session restore'
+alias repoa='repo forall -c'
+alias vim-plugin-install='vim +BundleInstall +BundleClean! +qall'
+
+# extend path variable
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=$HOME/bin:$PATH
+#export PATH=$HOME/bin/gcc-linaro-arm-linux-gnueabihf-4.8/bin:$PATH
+#export CROSS_COMPILE=arm-linux-gnueabihf-
+

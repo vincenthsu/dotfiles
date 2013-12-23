@@ -1,0 +1,27 @@
+#!/bin/sh
+
+BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+REMOTE="origin"
+
+if [ -z "$1" ]; then
+    echo "repo not set, use default: $REMOTE,\
+    format: git-force-update <repo> <branch>"
+else
+    REMOTE="$1"
+fi
+
+if [ -z "$2" ]; then
+    echo "branch not set, use default: $BRANCH,\
+    format: git-force-update <repo> <branch>"
+else
+    BRANCH="$2"
+fi
+
+echo "force checkout to $REMOTE/$BRANCH"
+git add .
+git commit -a -m "tmp commit"
+git branch -m tmp-xxxasdf321
+git checkout -b $BRANCH $REMOTE/$BRANCH
+git branch -D tmp-xxxasdf321
+
+

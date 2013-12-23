@@ -1,0 +1,44 @@
+#!/bin/sh
+
+export USR_NAME="Vincent Hsu"
+export ORI_MAIL="vincent.hsu@linaro.org"
+export NEW_MAIL="vimhsu@gmail.com"
+
+if [ -z "$1" ]; then
+    echo "original email not set, use default: $ORI_MAIL,\
+    format: git-filter <original email> <new email>"
+else
+    export ORI_MAIL="$1"
+fi
+
+if [ -z "$2" ]; then
+    echo "new email not set, use default: $NEW_MAIL,\
+    format: git-filter <original email> <new email>"
+else
+    export NEW_MAIL="$2"
+    echo "new mail: $NEW_MAIL"
+fi
+
+git filter-branch -f --env-filter '
+an="$GIT_AUTHOR_NAME"
+am="$GIT_AUTHOR_EMAIL"
+cn="$GIT_COMMITTER_NAME"
+cm="$GIT_COMMITTER_EMAIL"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$ORI_MAIL" ]
+then
+   cn="$USR_NAME"
+   cm="$NEW_MAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$ORI_MAIL" ]
+then
+   an="$USR_NAME"
+   am="$NEW_MAIL"
+fi
+
+export GIT_AUTHOR_NAME="$an"
+export GIT_AUTHOR_EMAIL="$am"
+export GIT_COMMITTER_NAME="$cn"
+export GIT_COMMITTER_EMAIL="$cm"
+'
+
