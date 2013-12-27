@@ -1,7 +1,6 @@
 # some more aliases
 ## already have commands
-alias vi='vim -p'
-alias vim='vim -p'
+alias vi='vim'
 alias cp='cp -R'
 alias rm='rm -R'
 alias chmod='chmod -R'

@@ -56,6 +56,9 @@ export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 
+# unbind the lock screen key
+stty stop ''
+
 # Additional definitions.
 # You may want to put all your additions into a separate file.
 # See /usr/share/doc/bash-doc/examples in the bash-doc psh_privateackage.
