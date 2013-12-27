@@ -5,19 +5,23 @@ set -e
 echo ''
 
 info () {
-    printf "  [ \033[00;34m..\033[0m ] $1\n"
+    printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+}
+
+warn () {
+    printf "\r  [ \033[0;31m!!\033[0m ] $1\n"
 }
 
 user () {
-    printf "\r  [ \033[0;33m?\033[0m ] $1 "
+    printf "\r  [ \033[0;33m??\033[0m ] $1 "
 }
 
 success () {
-    printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+    printf "\r  [ \033[0;32mOK\033[0m ] $1\n"
 }
 
 fail () {
-    printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+    printf "\r  [\033[0;31mFAIL\033[0m] $1\n"
     echo ''
     exit
 }
@@ -31,14 +35,15 @@ overwrite_branch () {
     read -n 1 action
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
+        info "wait for overwriting..."
         git add .
-        git commit -a -m "xxx"
-        git branch -m xxx
+        git commit -a -m "tmp commit"
+        git branch -m tmp-xxx-812
         git checkout -b master origin/master
-        git branch -D xxx
-        success "\noverwrited git branch\n"
+        git branch -D tmp-xxx-812
+        success "checkout to origin/master"
     else
-        fail "\ndo nothing\n"
+        fail "do nothing"
     fi
 }
 
@@ -46,19 +51,24 @@ update_dotfiles () {
     info 'updating dotfiles'
     ret=0
 
-    git status | ( grep -e "Changes not staged for commit" -e "Changes to be committed" ) || ret=$?
-    if [ $ret -eq 0 ]
+    git status | ( grep "Changes" ) && ret=1
+    if [ $ret -eq 1 ]
     then
-        user "Changes need to be committed!!\nDo you want to overwrite current git branch? [Y/N]"
+        warn "Changes are not committed!"
+        user "Do you want to overwrite current git branch? [Y/N]"
         overwrite_branch
     fi
 
-    git pull origin master | ( grep "CONFLICT" ) || ret=$?
-    if [ $ret -eq 0 ]
+    ret=0
+    git fetch origin
+    git merge origin/master | grep "CONFLICT" && ret=1
+    if [ $ret -eq 1 ]
     then
-        user "Conflict!!\nDo you want to overwrite current git branch? [Y/N]"
+        warn "Conflict!"
+        user "Do you want to overwrite current git branch? [Y/N]"
         overwrite_branch
     fi
+    unset ret
 
     git submodule foreach --recursive git fetch origin
     git submodule update --init --recursive
