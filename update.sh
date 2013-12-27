@@ -26,11 +26,6 @@ fail () {
     exit
 }
 
-link_files () {
-    ln -s $1 $2
-    success "linked $1 to $2"
-}
-
 overwrite_branch () {
     read -n 1 action
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
@@ -45,6 +40,16 @@ overwrite_branch () {
     else
         fail "do nothing"
     fi
+}
+
+link_files () {
+    ln -s $1 $2
+    success "linked $1 to $2"
+}
+
+copy_files () {
+    cp -a $1 $2
+    success "copy $1 to $2"
 }
 
 update_dotfiles () {
@@ -79,6 +84,7 @@ install_dotfiles () {
     overwrite_all=false
     backup_all=false
     skip_all=false
+    is_link=$3
 
     for src in `find $1 -maxdepth 1 -mindepth 1`
     do
@@ -125,18 +131,30 @@ install_dotfiles () {
 
             if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
             then
-                link_files $src $dst
+                if [ "$is_link" == "1" ] 
+                then
+                    link_files $src $dst
+                else
+                    copy_files $src $dst
+                fi
             else
                 success "skipped $src"
             fi
         else
-            link_files $src $dst
+            if [ "$is_link" == "1" ] 
+            then
+                link_files $src $dst
+            else
+                copy_files $src $dst
+            fi
         fi
     done
 }
 
 update_dotfiles
-install_dotfiles $DOTFILES_ROOT/link $HOME
+install_dotfiles $DOTFILES_ROOT/link $HOME 1
+install_dotfiles $DOTFILES_ROOT/copy $HOME 0
+chmod 400 $HOME/.ssh/id_*
 
 # for Mac
 if [ "$(uname -s)" == "Darwin" ]

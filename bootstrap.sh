@@ -15,8 +15,6 @@ fi
 if [ $do_nothing ]; then
     unset do_nothing
 else
-    rsync --exclude ".DS_Store" \
-        -rtv --no-perms copy/ ~
     source update.sh
     if [ -f $HOME/.viminfo ]; then
         rm -rf $HOME/.viminfo
