@@ -23,16 +23,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-if [ "$(uname -s)" == "Darwin" ] || [ -d /etc/apt ]; then
-    if type -t __git_ps1 | grep -q '^function$' 2>/dev/null ; then
-        PS1='\[\033[01;32m\]\t \[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[01;31m\]$(__git_ps1)\[\033[00m\]\$ '
-    else
-        PS1='\[\033[01;32m\]\t \[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[00m\]\$ '
-    fi
-else
-    PS1='\u@\h:\w\$ '
-fi
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -48,6 +38,20 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# colorful prompt if possible
+case "$TERM" in
+*-256color|*-color)
+    if type __git_ps1 > /dev/null 2>&1 ; then
+        PS1='\[\033[01;32m\]\t \[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[01;31m\]$(__git_ps1)\[\033[00m\]\$ '
+    else
+        PS1='\[\033[01;32m\]\t \[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[00m\]\$ '
+    fi
+    ;;
+*)
+    PS1='\u@\h:\w\$ '
+    ;;
+esac
 
 # colorful man page
 export PAGER="`which less` -s"
