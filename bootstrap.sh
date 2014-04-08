@@ -8,7 +8,7 @@ if [ -d $HOME/.dotfiles ]; then
         git pull origin master
     fi
 else
-    git clone --recursive git@bitbucket.org:vincenthsu/dotfiles.git $HOME/.dotfiles
+    git clone --recursive https://github.com/vincenthsu/dotfiles.git $HOME/.dotfiles
     cd $HOME/.dotfiles
 fi
 

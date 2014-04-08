@@ -4,7 +4,7 @@ manage your configurations by git
 
 ## Installation
 
-    cd $HOME; git clone --recursive git@github.com:vincenthsu/dotfiles.git $HOME/.dotfiles; cd .dotfiles; source bootstrap.sh
+    cd $HOME; git clone https://github.com/vincenthsu/dotfiles.git $HOME/.dotfiles; cd .dotfiles; source bootstrap.sh
 
 if you behind a firewall
 
