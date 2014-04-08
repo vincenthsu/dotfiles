@@ -1,3 +1,8 @@
+# locale settings
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US:en"
+
 # some more aliases
 ## already have commands
 alias vi='vim'
