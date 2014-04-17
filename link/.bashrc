@@ -41,7 +41,7 @@ fi
 
 # colorful prompt if possible
 case "$TERM" in
-*-256color|*-color)
+xterm*|rxvt*|*-256color|*-color)
     if type __git_ps1 > /dev/null 2>&1 ; then
         PS1='\[\033[01;32m\]\t \[\033[01;34m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[01;31m\]$(__git_ps1)\[\033[00m\]\$ '
     else
