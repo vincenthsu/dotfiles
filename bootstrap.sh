@@ -19,4 +19,10 @@ else
     if [ -f $HOME/.viminfo ]; then
         rm -rf $HOME/.viminfo
     fi
+    if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
+        if [ ! -f $HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
+            cd $HOME/.vim/bundle/YouCompleteMe
+            ./install.sh --clang-completer
+        fi
+    fi
 fi
