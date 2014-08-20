@@ -13,7 +13,6 @@ alias chown='chown -R'
 alias wget='wget -np -c'
 alias grep='grep --mmap'
 alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
-alias ctags='ctags --sort=yes --languages=asm,c,c++,java,sh --exclude=.git --exclude=.svn -R'
 ## new aliases
 alias l='ls -CF'
 alias ll='ls -alF'
@@ -33,9 +32,11 @@ alias tmuxr='tmux-session restore'
 alias repoa='repo forall -c'
 alias vim-plugin-install='vim +BundleInstall +BundleClean! +qall'
 
+# for svn
+export SVN_EDITOR=vim
+
 # extend path variable
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH=$HOME/bin:$PATH
 #export PATH=$HOME/bin/gcc-linaro-arm-linux-gnueabihf-4.8/bin:$PATH
 #export CROSS_COMPILE=arm-linux-gnueabihf-
-
