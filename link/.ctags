@@ -2,7 +2,7 @@
 --exclude=.svn
 --exclude=.git
 --c++-kinds=+p
---fields=+iaS
+--fields=+liaS
 --extra=+qf
 --sort=yes
 --totals=yes

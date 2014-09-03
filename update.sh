@@ -164,4 +164,14 @@ fi
 
 vim +BundleInstall +BundleClean +helptags\ ~/.vim/doc +qall
 
+if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
+    info 'Do you want to re-compile ycmd? [Y/N]'
+    read -n 1 action
+    if [ "$action" == "y" ] || [ "$action" == "Y" ]
+    then
+        cd $HOME/.vim/bundle/YouCompleteMe
+        ./install.sh --clang-completer
+    fi
+fi
+
 source ~/.bashrc
