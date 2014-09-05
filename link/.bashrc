@@ -67,6 +67,57 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 # unbind the lock screen key
 stty stop ''
 
+# locale settings
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US:en"
+
+# some more aliases
+## alias for existing commands
+alias vi='vim'
+alias cp='cp -R'
+alias rm='rm -R'
+alias chmod='chmod -R'
+alias chown='chown -R'
+alias wget='wget -np -c'
+alias grep='grep --mmap'
+alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
+## new aliases
+alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias lm='ls -al |more'
+alias fn='find . -name'
+alias findn='find . -name'
+alias apti='apt-fast install -y --force-yes'
+alias rscp='rsync -av -P -e ssh'
+alias tags='ctags; gtags'
+alias tmux='tmux -2'
+alias tmuxa='tmux attach'
+alias tmuxt='tmux attach -t'
+alias tmuxl='tmux ls'
+alias tmuxs='tmux-session save'
+alias tmuxr='tmux-session restore'
+alias repoa='repo forall -c'
+alias vim-plugin-install='vim +BundleInstall +BundleClean! +qall'
+alias vim-plugin-update='vim +BundleUpdate +BundleClean! +qall'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
+alias .6='cd ../../../../../../'
+alias .7='cd ../../../../../../../'
+alias .8='cd ../../../../../../../../'
+
+# for svn
+export SVN_EDITOR=vim
+
+# extend path variable
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=$HOME/bin:$PATH
+
 # Additional definitions.
 # You may want to put all your additions into a separate file.
 # See /usr/share/doc/bash-doc/examples in the bash-doc psh_privateackage.
@@ -74,4 +125,3 @@ for file in ~/.{bash_private,bash_aliases,bash_pathes}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
-

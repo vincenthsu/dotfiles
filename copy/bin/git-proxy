@@ -1,12 +1,14 @@
 #!/bin/sh
 
+PROXY_URL="http://192.168.6.2:8080"
+
 if ! type "git-proxy-connect" > /dev/null ; then
     echo "No git-proxy-connect exist"
 else
     # http proxy setting
-    export http_proxy=http://192.168.6.2:8080
-    export https_proxy=http://192.168.6.2:8080
-    export ftp_proxy=http://192.168.6.2:8080
+    export http_proxy=$PROXY_URL
+    export https_proxy=$PROXY_URL
+    export ftp_proxy=$PROXY_URL
 
     # set git to use ssh over http proxy
     export GIT_SSH="$HOME/bin/git-proxy-ssh.sh"

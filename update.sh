@@ -32,7 +32,7 @@ overwrite_branch () {
     read -n 1 action
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
-        info "wait for overwriting..."
+        info "Wait for overwriting..."
         git add .
         git commit -a -m "tmp commit"
         git branch -m tmp-xxx-812
@@ -40,7 +40,7 @@ overwrite_branch () {
         git branch -D tmp-xxx-812
         success "checkout to origin/master"
     else
-        fail "do nothing"
+        warn "Didn't overwrite"
     fi
 }
 
@@ -90,64 +90,67 @@ install_dotfiles () {
 
     for src in `find $1 -maxdepth 1 -mindepth 1`
     do
-    dst="$2/`basename \"${src}\"`"
-        if [ -f $dst ] || [ -d $dst ] || [ -L $dst ]
+        if [ $src != "$DOTFILES_ROOT/private/.git" ] &&  [ $src != "$DOTFILES_ROOT/private/.gitignore" ]
         then
-            overwrite=false
-            backup=false
-            skip=false
-
-            if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+            dst="$2/`basename \"${src}\"`"
+            if [ -f $dst ] || [ -d $dst ] || [ -L $dst ]
             then
-                user "File already exists: `basename $src`, \nWhat do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-                read -n 1 action
-                case "$action" in
-                    o )
-                        overwrite=true;;
-                    O )
-                        overwrite_all=true;;
-                    b )
-                        backup=true;;
-                    B )
-                        backup_all=true;;
-                    s )
-                        skip=true;;
-                    S )
-                        skip_all=true;;
-                    * )
-                        ;;
-                esac
-            fi
+                overwrite=false
+                backup=false
+                skip=false
 
-            if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
-            then
-                rm -rf $dst
-                success "removed $dst"
-            fi
+                if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+                then
+                    user "File already exists: `basename $src`, \nWhat do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                    read -n 1 action
+                    case "$action" in
+                        o )
+                            overwrite=true;;
+                        O )
+                            overwrite_all=true;;
+                        b )
+                            backup=true;;
+                        B )
+                            backup_all=true;;
+                        s )
+                            skip=true;;
+                        S )
+                            skip_all=true;;
+                        * )
+                            ;;
+                    esac
+                fi
 
-            if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
-            then
-                mv $dst $dst\.backup
-                success "moved $dst to $dst.backup"
-            fi
+                if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
+                then
+                    rm -rf $dst
+                    success "removed $dst"
+                fi
 
-            if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
-            then
+                if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
+                then
+                    mv $dst $dst\.backup
+                    success "moved $dst to $dst.backup"
+                fi
+
+                if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
+                then
+                    if [ "$is_link" == "1" ] 
+                    then
+                        link_files $src $dst
+                    else
+                        copy_files $src $dst
+                    fi
+                else
+                    success "skipped $src"
+                fi
+            else
                 if [ "$is_link" == "1" ] 
                 then
                     link_files $src $dst
                 else
                     copy_files $src $dst
                 fi
-            else
-                success "skipped $src"
-            fi
-        else
-            if [ "$is_link" == "1" ] 
-            then
-                link_files $src $dst
-            else
-                copy_files $src $dst
             fi
         fi
     done
@@ -159,6 +162,7 @@ update_dotfiles
 # relink & copy configs
 install_dotfiles $DOTFILES_ROOT/link $HOME 1
 install_dotfiles $DOTFILES_ROOT/copy $HOME 0
+install_dotfiles $DOTFILES_ROOT/private $HOME 1
 
 # for Mac
 if [ "$(uname -s)" == "Darwin" ]
