@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+VIM_ROOT="$HOME/.vim"
 DOTFILES_ROOT="`pwd`"
+
 set -e
 echo ''
 
@@ -151,25 +153,34 @@ install_dotfiles () {
     done
 }
 
+# fetch updates form git repo
 update_dotfiles
+
+# relink & copy configs
 install_dotfiles $DOTFILES_ROOT/link $HOME 1
 install_dotfiles $DOTFILES_ROOT/copy $HOME 0
-chmod 400 $HOME/.ssh/id_*
 
 # for Mac
 if [ "$(uname -s)" == "Darwin" ]
 then
-    install_dotfiles $DOTFILES_ROOT/osx $HOME
+    install_dotfiles $DOTFILES_ROOT/osx $HOME 0
 fi
 
-vim +BundleInstall +BundleClean +helptags\ ~/.vim/doc +qall
+# fix ssh file permissions
+chmod 400 $HOME/.ssh/id_*
 
-if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
+# for VIM
+if [ -d $VIM_ROOT/bundle/vundle ]; then
+    vim +BundleInstall +BundleUpdate +BundleClean +helptags\ ~/.vim/doc +qall
+fi
+
+# for VIM plugin YouCompleteMe
+if [ -d $VIM_ROOT/bundle/YouCompleteMe ]; then
     info 'Do you want to re-compile ycmd? [Y/N]'
     read -n 1 action
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
-        cd $HOME/.vim/bundle/YouCompleteMe
+        cd $VIM_ROOT/bundle/YouCompleteMe
         ./install.sh --clang-completer
     fi
 fi
