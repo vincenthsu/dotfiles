@@ -118,6 +118,11 @@ export SVN_EDITOR=vim
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH=$HOME/bin:$PATH
 
+# for z.sh
+if [ -f $HOME/bin/z.sh ]; then
+    . $HOME/bin/z.sh
+fi
+
 # Additional definitions.
 # You may want to put all your additions into a separate file.
 # See /usr/share/doc/bash-doc/examples in the bash-doc psh_privateackage.
