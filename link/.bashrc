@@ -80,7 +80,7 @@ alias rm='rm -R'
 alias chmod='chmod -R'
 alias chown='chown -R'
 alias wget='wget -np -c'
-alias grep='grep --mmap'
+alias grep='LC_ALL=C grep'
 alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
 ## new aliases
 alias l='ls -CF'
