@@ -2,7 +2,7 @@
 
 export USR_NAME="Vincent Hsu"
 export ORI_MAIL="vincent.hsu@linaro.org"
-export NEW_MAIL="vimhsu@gmail.com"
+export NEW_MAIL="vincent.hsu@aol.com"
 
 if [ -z "$1" ]; then
     echo "original email not set, use default: $ORI_MAIL,\

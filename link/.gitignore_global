@@ -36,3 +36,15 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# SVN files #
+######################
+.svn
+
+# Tag files #
+######################
+tags
+cscope.out
+GPATH
+GRTAGS
+GTAGS
