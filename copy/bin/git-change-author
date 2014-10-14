@@ -42,3 +42,4 @@ export GIT_COMMITTER_NAME="$cn"
 export GIT_COMMITTER_EMAIL="$cm"
 '
 
+git update-ref -d refs/original/refs/heads/master
