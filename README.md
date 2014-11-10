@@ -15,4 +15,9 @@ if you behind a firewall
 
     cd $HOME/.dotfiles; source update.sh
 
+## Private date
+    
+    You can manage your private configuration in the private fold. update.sh will create links for them.
 
+    git clone <Your private git repo> $HOME/.dotfiles/private
+    cd $HOME/.dotfiles; source update.sh
