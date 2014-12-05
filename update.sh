@@ -90,7 +90,8 @@ install_dotfiles () {
 
     for src in `find $1 -maxdepth 1 -mindepth 1`
     do
-        if [ $src != "$DOTFILES_ROOT/private/.git" ] &&  [ $src != "$DOTFILES_ROOT/private/.gitignore" ]
+        if [ $src != "$DOTFILES_ROOT/private/.git" ] &&
+            [ $src != "$DOTFILES_ROOT/private/.gitignore" ]
         then
             dst="$2/`basename \"${src}\"`"
             if [ -f $dst ] || [ -d $dst ] || [ -L $dst ]
@@ -135,7 +136,7 @@ install_dotfiles () {
 
                 if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
                 then
-                    if [ "$is_link" == "1" ] 
+                    if [ "$is_link" == "1" ]
                     then
                         link_files $src $dst
                     else
@@ -145,7 +146,7 @@ install_dotfiles () {
                     success "skipped $src"
                 fi
             else
-                if [ "$is_link" == "1" ] 
+                if [ "$is_link" == "1" ]
                 then
                     link_files $src $dst
                 else

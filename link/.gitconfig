@@ -1,0 +1,19 @@
+[include]
+	path = ~/.gitconfig.local
+[alias]
+	fl = log --format=fuller
+	ol = log --oneline --abbrev-commit --date=relative --pretty=format:'%C(yellow)%h%C(red)%d%Creset %s %C(green)%cr %C(blue)<%an>%Creset'
+	gl = log --all --graph --oneline --decorate
+	bh = log --all --graph --oneline --decorate --simplify-by-decoration
+	d = difftool
+	st = status
+[color]
+	ui = auto
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore.global
+	whitespace = cr-at-eol
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

@@ -123,10 +123,7 @@ if [ -f $HOME/bin/z.sh ]; then
     . $HOME/bin/z.sh
 fi
 
-# Additional definitions.
-# You may want to put all your additions into a separate file.
-# See /usr/share/doc/bash-doc/examples in the bash-doc psh_privateackage.
-for file in ~/.{bash_private,bash_aliases,bash_pathes}; do
+for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
