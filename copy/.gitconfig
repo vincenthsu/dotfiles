@@ -1,9 +1,0 @@
-[color]
-	ui = always
-[core]
-	editor = vim
-	excludesfile = ~/.gitignore_global
-[alias]
-	fl = log --format=fuller
-	cl = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	bh = log --all --graph --decorate --oneline --simplify-by-decoration

@@ -163,7 +163,9 @@ update_dotfiles
 # relink & copy configs
 install_dotfiles $DOTFILES_ROOT/link $HOME 1
 install_dotfiles $DOTFILES_ROOT/copy $HOME 0
-install_dotfiles $DOTFILES_ROOT/private $HOME 1
+if [ -d $DOTFILES_ROOT/private ]; then
+    install_dotfiles $DOTFILES_ROOT/private $HOME 1
+fi
 
 # for Mac
 if [ "$(uname -s)" == "Darwin" ]
