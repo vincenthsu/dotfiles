@@ -2,6 +2,8 @@
 
 DOTFILES_REPO="https://github.com/vincenthsu/dotfiles.git"
 DOTFILES_PATH="$HOME/.dotfiles"
+VIM_PATH="$DOTFILES_PATH/link/.vim"
+FONTS_PATH="$DOTFILES_PATH/fonts"
 
 if [ -d $DOTFILES_PATH ]; then
     if [ $(pwd) != $DOTFILES_PATH ]; then
@@ -18,16 +20,20 @@ fi
 if [ $do_nothing ]; then
     unset do_nothing
 else
-    source update.sh
+    ./update.sh
     # for VIM
     if [ -f $HOME/.viminfo ]; then
         rm -rf $HOME/.viminfo
     fi
     # for VIM plugin YouCompleteMe
-    if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
-        if [ ! -f $HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
-            cd $HOME/.vim/bundle/YouCompleteMe
+    if [ -d $VIM_PATH/bundle/YouCompleteMe ]; then
+        if [ ! -f $VIM_PATH/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
+            cd $VIM_PATH/bundle/YouCompleteMe
             ./install.sh --clang-completer
         fi
     fi
 fi
+
+# install powerline fonts
+cd $FONTS_PATH
+./install.sh

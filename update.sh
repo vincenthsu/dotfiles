@@ -33,11 +33,12 @@ overwrite_branch () {
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
         info "Wait for overwriting..."
+        random="`date +%s`"
         git add .
         git commit -a -m "tmp commit"
-        git branch -m tmp-xxx-812
+        git branch -m tmp-$random
         git checkout -b master origin/master
-        git branch -D tmp-xxx-812
+        git branch -D tmp-$random
         success "checkout to origin/master"
     else
         warn "Didn't overwrite"

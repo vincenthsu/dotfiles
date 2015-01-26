@@ -1,3 +1,6 @@
 [submodule "link/.vim"]
 	path = link/.vim
 	url = https://github.com/vincenthsu/vimrc.git
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts.git
