@@ -3,4 +3,4 @@
 	url = https://github.com/vincenthsu/vimrc.git
 [submodule "fonts"]
 	path = fonts
-	url = https://github.com/powerline/fonts.git
+	url = https://github.com/vincenthsu/powerline-fonts.git
