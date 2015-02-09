@@ -175,7 +175,7 @@ then
 fi
 
 # fix ssh file permissions
-chmod 400 $HOME/.ssh/id_*
+chmod 400 $HOME/.ssh/id_*  || true
 
 # for VIM
 if [ -d $VIM_ROOT/bundle/vundle ]; then
