@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vim $(git show --name-only --oneline | awk 'NR>1{ print $1 }')
