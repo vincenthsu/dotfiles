@@ -165,7 +165,8 @@ update_dotfiles
 install_dotfiles $DOTFILES_ROOT/link $HOME 1
 install_dotfiles $DOTFILES_ROOT/copy $HOME 0
 if [ -d $DOTFILES_ROOT/private ]; then
-    install_dotfiles $DOTFILES_ROOT/private $HOME 1
+    install_dotfiles $DOTFILES_ROOT/private/link $HOME 1
+    install_dotfiles $DOTFILES_ROOT/private/copy $HOME 0
 fi
 
 # for Mac
