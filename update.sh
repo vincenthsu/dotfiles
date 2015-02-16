@@ -183,15 +183,4 @@ if [ -d $VIM_ROOT/bundle/vundle ]; then
     vim +BundleInstall +BundleUpdate +BundleClean +helptags\ ~/.vim/doc +qall
 fi
 
-# for VIM plugin YouCompleteMe
-if [ -d $VIM_ROOT/bundle/YouCompleteMe ]; then
-    info 'Do you want to re-compile ycmd? [Y/N]'
-    read -n 1 action
-    if [ "$action" == "y" ] || [ "$action" == "Y" ]
-    then
-        cd $VIM_ROOT/bundle/YouCompleteMe
-        ./install.sh --clang-completer
-    fi
-fi
-
 source ~/.bashrc
