@@ -164,8 +164,10 @@ update_dotfiles
 # relink & copy configs
 install_dotfiles $DOTFILES_ROOT/link $HOME 1
 install_dotfiles $DOTFILES_ROOT/copy $HOME 0
-if [ -d $DOTFILES_ROOT/private ]; then
+if [ -d $DOTFILES_ROOT/private/link ]; then
     install_dotfiles $DOTFILES_ROOT/private/link $HOME 1
+fi
+if [ -d $DOTFILES_ROOT/private/copy ]; then
     install_dotfiles $DOTFILES_ROOT/private/copy $HOME 0
 fi
 
@@ -176,10 +178,12 @@ then
 fi
 
 # fix ssh file permissions
-chmod 400 $HOME/.ssh/id_*  || true
+if [ -f $HOME/.ssh/id_rsa ]; then
+    chmod 400 $HOME/.ssh/id_*
+fi
 
 # for VIM
-if [ -d $VIM_ROOT/bundle/vundle ]; then
+if [ -d $VIM_ROOT/bundle/Vundle.vim ]; then
     vim +BundleInstall +BundleUpdate +BundleClean +helptags\ ~/.vim/doc +qall
 fi
 
