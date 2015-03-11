@@ -114,7 +114,6 @@ import errno
 import optparse
 import os
 import re
-import shutil
 import stat
 import subprocess
 import sys
@@ -139,6 +138,10 @@ def _print(*objects, **kwargs):
 
 # Python version check
 ver = sys.version_info
+if ver[0] == 3:
+  _print('warning: Python 3 support is currently experimental. YMMV.\n'
+         'Please use Python 2.6 - 2.7 instead.',
+         file=sys.stderr)
 if (ver[0], ver[1]) < MIN_PYTHON_VERSION:
   _print('error: Python version %s unsupported.\n'
          'Please use Python 2.6 - 2.7 instead.'
@@ -738,7 +741,12 @@ def main(orig_args):
       try:
         _Init(args)
       except CloneFailure:
-        shutil.rmtree(os.path.join(repodir, S_repo), ignore_errors=True)
+        for root, dirs, files in os.walk(repodir, topdown=False):
+          for name in files:
+            os.remove(os.path.join(root, name))
+          for name in dirs:
+            os.rmdir(os.path.join(root, name))
+        os.rmdir(repodir)
         sys.exit(1)
       repo_main, rel_repo_dir = _FindRepo()
     else:
@@ -764,8 +772,4 @@ def main(orig_args):
 
 
 if __name__ == '__main__':
-  if ver[0] == 3:
-    _print('warning: Python 3 support is currently experimental. YMMV.\n'
-           'Please use Python 2.6 - 2.7 instead.',
-           file=sys.stderr)
   main(sys.argv[1:])

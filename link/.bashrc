@@ -75,8 +75,7 @@ export LANGUAGE="en_US:en"
 # some more aliases
 ## alias for existing commands
 alias vi='vim'
-alias cp='cp -R'
-alias rm='rm -R'
+alias cp='cp -aR'
 alias chmod='chmod -R'
 alias chown='chown -R'
 alias wget='wget -np -c'
