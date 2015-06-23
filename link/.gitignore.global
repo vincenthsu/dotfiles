@@ -2,10 +2,10 @@
 ###################
 *.com
 *.class
-*.dll
+# *.dll
 *.exe
 *.o
-*.so
+# *.so
 
 # Packages #
 ############
@@ -24,8 +24,8 @@
 # Logs and databases #
 ######################
 *.log
-*.sql
-*.sqlite
+# *.sql
+# *.sqlite
 
 # OS generated files #
 ######################

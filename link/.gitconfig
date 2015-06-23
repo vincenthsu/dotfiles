@@ -14,10 +14,9 @@
 	gl = log --all --graph --oneline --decorate
 	bh = log --all --graph --oneline --decorate --simplify-by-decoration
 	d = difftool
-    st = status
-    tadd = subtree add --prefix
-    tmerge = subtree merge --prefix
-    tpush = subtree push --prefix
-    tpull = subtree pull --prefix
-    tsplit = subtree split --prefix
-
+	st = status
+	tadd = subtree add --prefix
+	tmerge = subtree merge --prefix
+	tpush = subtree push --prefix
+	tpull = subtree pull --prefix
+	tsplit = subtree split --prefix
