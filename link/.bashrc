@@ -16,21 +16,6 @@ shopt -s histappend
 HISTSIZE=10000
 HISTFILESIZE=$HISTSIZE
 
-# After each command, append to the history file and reread it
-history() {
-    _bash_history_sync
-    builtin history "$@"
-}
-
-_bash_history_sync() {
-    builtin history -a         #1
-    HISTFILESIZE=$HISTSIZE     #2
-    builtin history -c         #3
-    builtin history -r         #4
-}
-
-PROMPT_COMMAND=_bash_history_sync
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize

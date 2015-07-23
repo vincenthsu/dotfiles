@@ -5,7 +5,7 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore.global
-	whitespace = cr-at-eol
+	autocrlf = input
 [difftool]
 	prompt = false
 [alias]
