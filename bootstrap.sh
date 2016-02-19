@@ -11,7 +11,7 @@ if [ -d $DOTFILES_PATH ]; then
         git pull origin master
     fi
 else
-    git clone --recursive $DOTFILES_REPO $DOTFILE_PATH
+    git clone --recursive $DOTFILES_REPO $DOTFILES_PATH
     cd $DOTFILES_PATH
 fi
 
