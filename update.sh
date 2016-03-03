@@ -33,6 +33,8 @@ overwrite_branch () {
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
         info "Wait for overwriting..."
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
         random="`date +%s`"
         git add .
         git commit -a -m "tmp commit"
