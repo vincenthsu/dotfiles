@@ -114,7 +114,6 @@ alias .8='cd ../../../../../../../../'
 export SVN_EDITOR=vim
 
 # extend path variable
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH=$HOME/bin:$PATH
 
 # for z.sh
