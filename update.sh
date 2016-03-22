@@ -184,9 +184,11 @@ if [ -f $HOME/.ssh/id_rsa ]; then
     chmod 400 $HOME/.ssh/id_*
 fi
 
-# for VIM
-if [ -d $VIM_ROOT/bundle/Vundle.vim ]; then
-    vim +BundleInstall +BundleUpdate +BundleClean +helptags\ ~/.vim/doc +qall
+# update vim plugins
+if [ ! -f $VIM_ROOT/autoload/plug.vim ]; then
+    mkdir -p ~/.vim/autoload
+    curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
 fi
+vim +PlugUpgrade +PlugUpdate +PlugClean! +helptags\ ~/.vim/doc +qall
 
 source ~/.bashrc
