@@ -23,15 +23,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -CF --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -73,22 +64,26 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="en_US:en"
 
 # some more aliases
-## alias for existing commands
-alias vi='vim'
-alias cp='cp -aR'
-alias chmod='chmod -R'
-alias chown='chown -R'
-alias wget='wget -np -c'
-alias grep='LC_ALL=C grep'
-alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
-## new aliases
-alias l='ls -CF'
-alias ll='ls -alF'
+alias grep='LC_ALL=C grep --color=auto'
+alias fgrep='LC_ALL=C fgrep --color=auto'
+alias egrep='LC_ALL=C egrep --color=auto'
+alias grepr='grep -irn'
+alias gr='grep -irn'
+alias ls='ls -CF'
+alias l='ls'
+alias ll='ls -al'
 alias la='ls -A'
 alias lm='ls -al |more'
+alias chmod='chmod -R'
+alias chown='chown -R'
+alias cp='cp -aR'
+alias indent='indent -npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1'
+alias vi='vim'
+alias wget='wget -np -c'
+alias apti='apt-fast install -y --force-yes'
 alias fn='find . -name'
 alias findn='find . -name'
-alias apti='apt-fast install -y --force-yes'
+alias repoa='repo forall -c'
 alias rscp='rsync -av -P -e ssh'
 alias tags='ctags; gtags'
 alias tmux='tmux -2'
@@ -97,7 +92,6 @@ alias tmuxt='tmux attach -t'
 alias tmuxl='tmux ls'
 alias tmuxs='tmux-session save'
 alias tmuxr='tmux-session restore'
-alias repoa='repo forall -c'
 alias vim-plugin-install='vim +PlugUpdate +PlugClean! +qall'
 alias vim-plugin-update='vim +PlugUpgrade +PlugUpdate +PlugClean! +qall'
 alias cd..='cd ..'
