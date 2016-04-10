@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 DOTFILES_PATH="$HOME/.dotfiles"
-VIM_PATH="$HOME/.vim"
 FONTS_PATH="$DOTFILES_PATH/fonts"
+VIM_PATH="$HOME/.vim"
+YCM_PATH="$VIM_PATH/plugged/YouCompleteMe"
 
 # for VIM plugin YouCompleteMe
-if [ -d $VIM_PATH/bundle/YouCompleteMe ]; then
+if [ -d $YCM_PATH ]; then
     printf '\rDo you want to re-compile ycmd? [Y/N]\n'
     read -n 1 action
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
-        cd $VIM_PATH/bundle/YouCompleteMe
+        cd $YCM_PATH
         ./install.sh --clang-completer
     fi
 fi
