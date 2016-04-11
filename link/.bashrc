@@ -109,17 +109,19 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-# for svn
-export SVN_EDITOR=vim
-
 # extend path variable
 export PATH=$HOME/bin:$PATH
 
-# for z.sh
-if [ -f $HOME/bin/z.sh ]; then
-    . $HOME/bin/z.sh
-fi
+# svn
+export SVN_EDITOR=vim
 
+# z.sh
+[ -f ~/bin/z.sh ] && source ~/bin/z.sh
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash && command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# local configurations
 for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
     [ -r "$file" ] && source "$file"
 done
