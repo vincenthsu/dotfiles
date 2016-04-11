@@ -3,6 +3,10 @@ then
     # colorful bash
     export CLICOLOR="xterm-color"
     export LSCOLORS="gxfxcxdxbxegedabagacad"
+    alias ls='ls -CF'
+    alias grep='LC_ALL=C grep --color=auto'
+    alias fgrep='LC_ALL=C fgrep --color=auto'
+    alias egrep='LC_ALL=C egrep --color=auto'
 
     # extend path variable
     export PYTHONPATH=/usr/local/lib/python2.7/site-packages/

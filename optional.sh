@@ -12,7 +12,7 @@ if [ -d $YCM_PATH ]; then
     if [ "$action" == "y" ] || [ "$action" == "Y" ]
     then
         cd $YCM_PATH
-        ./install.sh --clang-completer
+        ./install.py --clang-completer
     fi
 fi
 

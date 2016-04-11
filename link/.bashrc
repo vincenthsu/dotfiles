@@ -23,6 +23,15 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -CF --color=auto'
+    alias grep='LC_ALL=C grep --color=auto'
+    alias fgrep='LC_ALL=C fgrep --color=auto'
+    alias egrep='LC_ALL=C egrep --color=auto'
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -64,12 +73,8 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="en_US:en"
 
 # some more aliases
-alias grep='LC_ALL=C grep --color=auto'
-alias fgrep='LC_ALL=C fgrep --color=auto'
-alias egrep='LC_ALL=C egrep --color=auto'
 alias grepr='grep -irn'
 alias gr='grep -irn'
-alias ls='ls -CF'
 alias l='ls'
 alias ll='ls -al'
 alias la='ls -A'
