@@ -3,9 +3,8 @@
 [color]
 	ui = auto
 [core]
-	editor = vim
 	excludesfile = ~/.gitignore.global
-	autocrlf = input
+	editor = vim
 	quotepath = false
 [difftool]
 	prompt = false
