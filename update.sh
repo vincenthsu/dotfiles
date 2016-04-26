@@ -84,11 +84,13 @@ update_dotfiles () {
     git submodule update --init --recursive
 }
 
+# global variables
+overwrite_all=false
+backup_all=false
+skip_all=false
+
 install_dotfiles () {
     info 'installing dotfiles'
-    overwrite_all=false
-    backup_all=false
-    skip_all=false
     is_link=$3
 
     for src in `find $1 -maxdepth 1 -mindepth 1`

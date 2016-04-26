@@ -1,13 +1,16 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# modify from Ubuntu 12.04 setting
+# for examples
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -20,24 +23,20 @@ HISTFILESIZE=$HISTSIZE
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -CF --color=auto'
-    alias grep='LC_ALL=C grep --color=auto'
-    alias fgrep='LC_ALL=C fgrep --color=auto'
-    alias egrep='LC_ALL=C egrep --color=auto'
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  fi
 fi
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
 
 # colorful prompt if possible
 case "$TERM" in
@@ -53,6 +52,18 @@ xterm*|rxvt*|*-256color|*-color)
     ;;
 esac
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -CF --color=auto'
+    alias grep='LC_ALL=C grep --color=auto'
+    alias fgrep='LC_ALL=C fgrep --color=auto'
+    alias egrep='LC_ALL=C egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # colorful man page
 export PAGER="`which less` -s"
 export BROWSER="$PAGER"
@@ -64,13 +75,9 @@ export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 
-# unbind the lock screen key
-stty stop ''
-
-# locale settings
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-export LANGUAGE="en_US:en"
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # some more aliases
 alias grepr='grep -irn'
@@ -109,8 +116,21 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-# extend path variable
-export PATH=$HOME/bin:$PATH
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# unbind the lock screen key
+stty stop ''
+
+# locale settings
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US:en"
 
 # svn
 export SVN_EDITOR=vim
@@ -121,8 +141,14 @@ export SVN_EDITOR=vim
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash && command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
-# local configurations
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# local definitions
 for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
+
