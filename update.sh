@@ -84,11 +84,6 @@ update_dotfiles () {
     git submodule update --init --recursive
 }
 
-# global variables
-overwrite_all=false
-backup_all=false
-skip_all=false
-
 install_dotfiles () {
     info 'installing dotfiles'
     is_link=$3
@@ -162,35 +157,45 @@ install_dotfiles () {
     done
 }
 
+install_all_dotfiles () {
+    # global variables
+    overwrite_all=false
+    backup_all=false
+    skip_all=false
+
+    # relink & copy configs
+    install_dotfiles $DOTFILES_ROOT/link $HOME 1
+    install_dotfiles $DOTFILES_ROOT/copy $HOME 0
+    if [ -d $DOTFILES_ROOT/private/link ]; then
+        install_dotfiles $DOTFILES_ROOT/private/link $HOME 1
+    fi
+    if [ -d $DOTFILES_ROOT/private/copy ]; then
+        install_dotfiles $DOTFILES_ROOT/private/copy $HOME 0
+    fi
+
+    # for Mac
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+        install_dotfiles $DOTFILES_ROOT/osx $HOME 0
+    fi
+
+    # fix ssh file permissions
+    if [ -f $HOME/.ssh/id_rsa ]; then
+        chmod 400 $HOME/.ssh/id_*
+    fi
+
+    # update vim plugins
+    if [ ! -f $VIM_ROOT/autoload/plug.vim ]; then
+        mkdir -p ~/.vim/autoload
+        curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+    fi
+    vim +PlugUpgrade +PlugUpdate +PlugClean! +helptags\ ~/.vim/doc +qall
+}
+
 # fetch updates form git repo
 update_dotfiles
 
-# relink & copy configs
-install_dotfiles $DOTFILES_ROOT/link $HOME 1
-install_dotfiles $DOTFILES_ROOT/copy $HOME 0
-if [ -d $DOTFILES_ROOT/private/link ]; then
-    install_dotfiles $DOTFILES_ROOT/private/link $HOME 1
-fi
-if [ -d $DOTFILES_ROOT/private/copy ]; then
-    install_dotfiles $DOTFILES_ROOT/private/copy $HOME 0
-fi
-
-# for Mac
-if [ "$(uname -s)" == "Darwin" ]
-then
-    install_dotfiles $DOTFILES_ROOT/osx $HOME 0
-fi
-
-# fix ssh file permissions
-if [ -f $HOME/.ssh/id_rsa ]; then
-    chmod 400 $HOME/.ssh/id_*
-fi
-
-# update vim plugins
-if [ ! -f $VIM_ROOT/autoload/plug.vim ]; then
-    mkdir -p ~/.vim/autoload
-    curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
-fi
-vim +PlugUpgrade +PlugUpdate +PlugClean! +helptags\ ~/.vim/doc +qall
+# installation
+install_all_dotfiles
 
 source ~/.bashrc
