@@ -1,5 +1,7 @@
 #!/bin/sh
+
 ctags --sort=yes --languages=Asm,c,c++,java --exclude=.git --exclude=.svn -R
-find $PWD -name "*.h" -o -name "*.c" -o -name "*.cc"  -o -name "*.cpp"  -o -name "*.java"  -o -name "*.aidl" > cscope.files
-cscope -bkq -i cscope.files
-gtags
+find . -name "*.h" -o -name "*.hpp" -o -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.java" -o -name "*.aidl" > files.list
+cscope -bkq -i files.list
+gtags -f files.list
+rm files.list
