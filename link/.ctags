@@ -50,3 +50,16 @@
 --regex-clojure=/\([ \t]*defstruct[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/s,struct/
 --regex-clojure=/\([ \t]*intern[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/v,intern/
 --regex-clojure=/\([ \t]*ns[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/n,namespace/
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#{1}[ \t]*([^#]+.*)/* \1/h,heading1/
+--regex-markdown=/^#{2}[ \t]*([^#]+.*)/*   \1/h,heading2/
+--regex-markdown=/^#{3}[ \t]*([^#]+.*)/*     \1/h,heading3/
+--regex-markdown=/^#{4}[ \t]*([^#]+.*)/*       \1/h,heading4/
+--regex-markdown=/^#{5}[ \t]*([^#]+.*)/*         \1/h,heading5/
+--regex-markdown=/^#{6}[ \t]*([^#]+.*)/*           \1/h,heading6/
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^(#+)[ \t]+([^#]*)/\1 \2/h,header,Markdown Headers/
+--regex-markdown=/\[([^\[]+)\]\(([^\)]+)\)/\1/l,link,Markdown Links/
+--regex-markdown=/!\[\]\(.*[\/ ](.*\.[a-z]{3})\)/\1/i,image,Markdown Image/
