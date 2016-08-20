@@ -81,9 +81,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # some more aliases
 alias apti='apt-fast install -y --force-yes'
-alias chmod='sudo chmod -R'
-alias chown='sudo chown -R'
-alias cp='cp -aR'
+alias cmr='chmod -R'
+alias cor='chown -R'
+alias cpr='cp -aR'
 alias fn='find . -name'
 alias findn='find . -name'
 alias gr='grep -irn'
