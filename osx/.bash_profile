@@ -14,10 +14,11 @@ then
     export PATH=$GEM_HOME/ruby/2.0.0/bin:$PATH
 
     # nvm
-    if [ -d $(brew --prefix nvm) ]; then
+    function loadnvm () {
         export NVM_DIR=$HOME/.nvm
-        . $(brew --prefix nvm)/nvm.sh
-    fi
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+    }
 
     # bash-completion
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
