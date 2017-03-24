@@ -20,3 +20,8 @@
 	tpush = subtree push --prefix
 	tpull = subtree pull --prefix
 	tsplit = subtree split --prefix
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

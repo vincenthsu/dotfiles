@@ -1,6 +1,6 @@
 #!/bin/bash
 
-verify_tmux_verision () {
+verify_tmux_version () {
     tmux_home=$HOME/.tmux
     tmux_version="$(tmux -V | cut -c 6-)"
 
@@ -18,4 +18,4 @@ verify_tmux_verision () {
     fi
 }
 
-verify_tmux_verision
+verify_tmux_version
