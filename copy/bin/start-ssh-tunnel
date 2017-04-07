@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ngrok tcp -region ap 22

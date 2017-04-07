@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# nmap -p <port> <ip>
+if [ -z "$1" ]; then
+    echo "Port number not set."
+    echo "Format: nmap -p <port> <ip>"
+    exit
+fi
+nmap -p $1 $2 | grep open -B3 -A1
