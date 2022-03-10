@@ -20,17 +20,23 @@ zicompinit # <- https://z-shell.pages.dev/docs/gallery/collection#minimal
 zi light-mode for z-shell/z-a-meta-plugins @annexes+rec
 
 #
+# Theme
+#
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#
 # OMZ
 #
 zi snippet OMZL::history.zsh
 zi snippet OMZL::key-bindings.zsh
-zi snippet OMZL::theme-and-appearance.zsh
-zi snippet OMZL::git.zsh
-zi ice lucid wait
-zi snippet OMZP::git
-zi cdclear -q
-setopt promptsubst
-zi snippet OMZT::agnoster
 
 #
 # Plugins
@@ -38,10 +44,10 @@ zi snippet OMZT::agnoster
 zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions
 zi lucid light-mode for \
-    zsh-users/zsh-autosuggestions \
-    z-shell/F-Sy-H \
-    z-shell/H-S-MW \
-    pick"z.sh" z-shell/z
+  zsh-users/zsh-autosuggestions \
+  z-shell/F-Sy-H \
+  z-shell/H-S-MW \
+  pick"z.sh" z-shell/z
 
 #
 # Programs
@@ -95,6 +101,5 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-if [ -f $HOME/.zshrc.local ]; then
-    source $HOME/.zshrc.local
-fi
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+
