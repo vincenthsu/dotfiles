@@ -22,7 +22,8 @@ zi light-mode for z-shell/z-a-meta-plugins @annexes+rec
 #
 # Theme
 #
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zi ice depth=1
+zi light romkatv/powerlevel10k
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -60,6 +61,21 @@ zi light @junegunn/fzf
 #
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+# Enable colorized output for ls
+if whence dircolors >/dev/null; then
+  export LS_COLORS=ExFxBxDxCxegedabagacad
+  alias ls='ls --color'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+else
+  export CLICOLOR=1
+  export LSCOLORS=ExFxBxDxCxegedabagacad
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
 
 #
 # Some more aliases
