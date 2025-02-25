@@ -6,8 +6,6 @@
 	excludesfile = ~/.gitignore.global
 	editor = vim
 	quotepath = false
-[difftool]
-	prompt = false
 [alias]
 	fl = log --format=fuller
 	ol = log --oneline --abbrev-commit --date=relative --pretty=format:'%C(yellow)%h%C(red)%d%Creset %s %C(green)%cr %C(blue)<%an>%Creset'
@@ -15,3 +13,8 @@
 	bh = log --all --graph --oneline --decorate --simplify-by-decoration
 	d = difftool
 	st = status
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -15,3 +15,9 @@ if [ -n "$BASH_VERSION" ]; then
         . "$HOME/.bashrc"
     fi
 fi
+
+[ -f ~/.profile.local ] && . ~/.profile.local
+
+. "$HOME/.cargo/env"
+
+. "$HOME/.local/bin/env"

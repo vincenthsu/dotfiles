@@ -181,3 +181,6 @@ for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
 done
 unset file
 
+. "$HOME/.cargo/env"
+
+. "$HOME/.local/bin/env"

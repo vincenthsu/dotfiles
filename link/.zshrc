@@ -17,7 +17,7 @@ zicompinit # <- https://z-shell.pages.dev/docs/gallery/collection#minimal
 #
 # Annex
 #
-zi light-mode for z-shell/z-a-meta-plugins @annexes+rec
+zi light z-shell/z-a-meta-plugins
 
 #
 # Theme
@@ -42,13 +42,13 @@ zi snippet OMZL::key-bindings.zsh
 #
 # Plugins
 #
-zi ice lucid wait as'completion'
-zi light zsh-users/zsh-completions
-zi lucid light-mode for \
-  zsh-users/zsh-autosuggestions \
-  z-shell/F-Sy-H \
-  z-shell/H-S-MW \
-  pick"z.sh" z-shell/z
+zi wait lucid for \
+  atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    z-shell/F-Sy-H \
+  blockf \
+    zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 
 #
 # Programs
@@ -117,5 +117,6 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
