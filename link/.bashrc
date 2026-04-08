@@ -1,9 +1,41 @@
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
+
+
+#
+# Custom PATH
+#
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# local definitions
+for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
+    [ -r "$file" ] && . "$file"
+done
+unset file
+
+. "$HOME/.cargo/env"
+. "$HOME/.local/bin/env"
+
+# Ignore terminal settings for AI agents
+case "${CLAUDECODE:-}:${TERM_PROGRAM:-}" in
+  *:Apple_Terminal|*:iTerm.app|*:ghostty)
+    ;;
+  *)
+    PS1='\$ '
+    return 0 2>/dev/null || exit 0
+    ;;
+esac
+
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -170,17 +202,9 @@ export SVN_EDITOR=vim
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash && command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
 
-# local definitions
-for file in ~/.{bashrc.local,bashrc.private,bashrc.aliases}; do
-    [ -r "$file" ] && . "$file"
-done
-unset file
 
-. "$HOME/.cargo/env"
 
-. "$HOME/.local/bin/env"
+
+# Added by Antigravity CLI installer
+export PATH="/Users/vincent/.local/bin:$PATH"

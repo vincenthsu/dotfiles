@@ -1,3 +1,5 @@
+
+
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -21,3 +23,9 @@ fi
 . "$HOME/.cargo/env"
 
 . "$HOME/.local/bin/env"
+
+
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/vincent/.local/bin:$PATH"

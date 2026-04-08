@@ -1,3 +1,6 @@
+# Ignore flowing if AI agent
+[[ -t 0 ]] || return
+
 #
 # Zi Initialzion
 #
@@ -55,6 +58,17 @@ zi wait lucid for \
 #
 zi ice from'gh-r' as'program'
 zi light @junegunn/fzf
+
+#
+# Other CLI completions
+#
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(~/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
 
 #
 # Locale
@@ -117,6 +131,6 @@ alias .6='cd ../../../../../../'
 alias .7='cd ../../../../../../../'
 alias .8='cd ../../../../../../../../'
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Ignore flowing if Human
+[[ -t 0 ]] && return
 

@@ -24,5 +24,30 @@ GPATH
 GRTAGS
 GTAGS
 GSYSMS
+
+# IDE files
+.cache
 .vscode
 .idea
+
+# AI agent related files
+.agent/
+.agents/
+.claude/
+.codex/
+.gemini/
+.antigravitycli/
+.github/
+.kiro/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.reports/
+.superpowers/
+openspec/
+openspec/.vector-search.db
+.claudignore
+.env
+.spectra/
+LEAN-CTX.md
+/skills-lock.json
