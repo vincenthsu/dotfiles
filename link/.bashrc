@@ -1,5 +1,3 @@
-
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -196,15 +194,8 @@ fi
 # svn
 export SVN_EDITOR=vim
 
-# z.sh
-[ -f ~/bin/z.sh ] && source ~/bin/z.sh
-
 # fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash && command -v ag >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-
-
-
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Added by Antigravity CLI installer
 export PATH="/Users/vincent/.local/bin:$PATH"
